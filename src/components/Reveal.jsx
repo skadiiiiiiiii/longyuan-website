@@ -1,0 +1,2 @@
+import { useEffect, useRef, useState } from 'react';
+export default function Reveal({children,className=''}) { const ref=useRef(null); const [seen,setSeen]=useState(false); useEffect(()=>{const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){setSeen(true);io.disconnect()}},{threshold:.12}); if(ref.current)io.observe(ref.current); return()=>io.disconnect()},[]); return <div ref={ref} className={`${className} reveal ${seen?'shown':''}`}>{children}</div> }
